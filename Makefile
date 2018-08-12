@@ -6,7 +6,7 @@ LDFLAGS:=-ldflags "-X github.com/aufaitio/builder/app.Version=${VERSION}"
 default: run
 
 depends:
-	../../../../bin/glide up
+	go get .
 
 test:
 	echo "mode: count" > coverage-all.out
