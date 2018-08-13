@@ -2,8 +2,6 @@ package app
 
 import (
 	"fmt"
-	"time"
-
 	"github.com/go-ozzo/ozzo-validation"
 	"github.com/spf13/viper"
 )
@@ -13,8 +11,8 @@ var Config AppConfig
 
 // AppConfig configuration necessary for the listener API
 type AppConfig struct {
-	DB       dbConfig
-	Interval int64
+	DB              dbConfig
+	IntervalMinutes int64
 }
 
 // DBConfig Config representing database info.
@@ -40,7 +38,7 @@ func LoadConfig(configPaths ...string) error {
 	v.SetConfigName("app")
 	v.AutomaticEnv()
 	v.SetDefault("DB", dbConfig{Host: "localhost", Port: 27017, Name: "aufait"})
-	v.SetDefault("Interval", time.Minute*10)
+	v.SetDefault("IntervalMinutes", 1)
 
 	for _, path := range configPaths {
 		v.AddConfigPath(path)

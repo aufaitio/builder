@@ -5,10 +5,7 @@ import (
 )
 
 // SetIntervalAsync with a non blocking task
-func SetIntervalAsync(callback func(), milliseconds int) chan bool {
-
-	interval := time.Duration(milliseconds) * time.Millisecond
-
+func SetIntervalAsync(callback func(), interval time.Duration) chan bool {
 	// Setup the ticker and the channel to signal the ending of the interval
 	ticker := time.NewTicker(interval)
 	clear := make(chan bool)
