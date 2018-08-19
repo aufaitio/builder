@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	log "github.com/aufaitio/plugins/lib/logger"
+	log "github.com/quantumew/plugins/lib/logger"
 	"github.com/mongodb/mongo-go-driver/mongo"
 )
 

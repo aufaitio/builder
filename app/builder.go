@@ -1,10 +1,10 @@
 package app
 
 import (
-	"github.com/aufaitio/data-access"
-	"github.com/aufaitio/data-access/daos"
-	"github.com/aufaitio/data-access/models"
-	"github.com/aufaitio/plugins/lib/logger"
+	"github.com/quantumew/data-access"
+	"github.com/quantumew/data-access/daos"
+	"github.com/quantumew/data-access/models"
+	"github.com/quantumew/plugins/lib/logger"
 	"github.com/mongodb/mongo-go-driver/mongo"
 )
 

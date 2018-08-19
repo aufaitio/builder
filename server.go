@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/Sirupsen/logrus"
-	"github.com/aufaitio/builder/app"
-	"github.com/aufaitio/builder/util"
-	log "github.com/aufaitio/plugins/lib/logger"
+	"github.com/quantumew/builder/app"
+	"github.com/quantumew/builder/util"
+	log "github.com/quantumew/plugins/lib/logger"
 	"github.com/docopt/docopt-go"
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"golang.org/x/net/context"
