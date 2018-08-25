@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 	"github.com/mongodb/mongo-go-driver/mongo"
+	"github.com/quantumew/data-access"
 	"github.com/quantumew/data-access/daos"
 	"github.com/quantumew/data-access/models"
 	"github.com/quantumew/plugins/lib/logger"
@@ -12,8 +13,8 @@ import (
 type Builder struct {
 	db      *mongo.Database
 	logger  logger.Logger
-	jobDAO  *daos.JobDAO
-	repoDAO *daos.RepositoryDAO
+	jobDAO  access.JobDAO
+	repoDAO access.RepositoryDAO
 }
 
 // NewBuilder factory for builder
