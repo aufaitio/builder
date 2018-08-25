@@ -1,7 +1,8 @@
 MAIN_VERSION:=$(shell git describe --abbrev=0 --tags || echo "0.1.0")
 VERSION:=${MAIN_VERSION}\#$(shell git log -n 1 --pretty=format:"%h")
 PACKAGES:=$(shell go list ./... | sed -n '1!p' | grep -v /vendor/)
-LDFLAGS:=-ldflags "-X github.com/aufaitio/builder/app.Version=${VERSION}"
+LDFLAGS:=-ldflags "-X github.com/quantumew/builder/app.Version=${VERSION}"
+TAG:=aufait-builder
 
 default: run
 
@@ -21,8 +22,10 @@ run:
 	go run ${LDFLAGS} server.go
 
 build: clean
-	go build ${LDFLAGS} -a -o builder server.go
-	docker builder --tag aufait-builder .
+	go build ${LDFLAGS} -a -o "builds/${GOOS}/builder" server.go
+
+docker:
+	docker build --cache-from ${TAG}:latest --tag ${TAG} .
 
 clean:
 	rm -rf server coverage.out coverage-all.out

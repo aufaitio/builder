@@ -1,4 +1,9 @@
-FROM node:8-alpine
+FROM ubuntu:18.04
 MAINTAINER andygertjejansen@gmail.com
-CMD ./builder
-ADD builder .
+EXPOSE 8080
+RUN mkdir -p /opt/app/config
+RUN apt-get update && apt-get install -y nodejs npm
+WORKDIR /opt/app
+COPY builds/linux/builder /opt/app
+COPY config/* /opt/app/config/
+CMD ["/opt/app/builder"]
