@@ -22,6 +22,7 @@ run:
 
 build: clean
 	go build ${LDFLAGS} -a -o builder server.go
+	docker builder --tag aufait-builder .
 
 clean:
 	rm -rf server coverage.out coverage-all.out
