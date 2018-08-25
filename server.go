@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/Sirupsen/logrus"
+	"github.com/docopt/docopt-go"
+	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/quantumew/builder/app"
 	"github.com/quantumew/builder/util"
 	log "github.com/quantumew/plugins/lib/logger"
-	"github.com/docopt/docopt-go"
-	"github.com/mongodb/mongo-go-driver/mongo"
 	"golang.org/x/net/context"
 	"os"
 	"os/signal"

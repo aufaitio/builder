@@ -1,19 +1,19 @@
 package app
 
 import (
-	"github.com/quantumew/data-access"
+	"fmt"
+	"github.com/mongodb/mongo-go-driver/mongo"
 	"github.com/quantumew/data-access/daos"
 	"github.com/quantumew/data-access/models"
 	"github.com/quantumew/plugins/lib/logger"
-	"github.com/mongodb/mongo-go-driver/mongo"
 )
 
 // Builder checks build queue and builds
 type Builder struct {
 	db      *mongo.Database
 	logger  logger.Logger
-	jobDAO  access.JobDAO
-	repoDAO access.RepositoryDAO
+	jobDAO  *daos.JobDAO
+	repoDAO *daos.RepositoryDAO
 }
 
 // NewBuilder factory for builder
@@ -25,30 +25,33 @@ func NewBuilder(db *mongo.Database, logger logger.Logger) *Builder {
 }
 
 // Check check build queue for build
-func (builder *Builder) Check() error {
+func (builder *Builder) Check() {
 	builder.logger.Infof("Checking build queue")
 	jobList, err := builder.jobDAO.Query(builder.db, 0, 1)
 
 	if err != nil {
-		return err
+		panic("failed to query for job")
 	}
 
 	if len(jobList) > 0 {
 		job := jobList[0]
-		repo, err := builder.repoDAO.GetByName(builder.db, job.Name)
+		repo, err := builder.repoDAO.Get(builder.db, job.Name)
 
 		if err != nil {
-			return err
+			panic(fmt.Sprintf("failed to get repository for given job %s", job.Name))
 		}
 
 		err = builder.Spawn(job, repo)
-	}
 
-	return err
+		if err != nil {
+			panic(fmt.Sprintf(`failed to spawn job "%s" for repository "%s"`, job.Name, repo.Name))
+		}
+	}
 }
 
 // Spawn spawns a build from queue
 func (builder *Builder) Spawn(job *models.Job, repo *models.Repository) error {
+	return nil
 }
 
 // CleanUp Cleans up builder job
